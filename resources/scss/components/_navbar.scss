@@ -1,0 +1,301 @@
+// ==========================================================================
+// NAVBAR - Navigation Components
+// ==========================================================================
+@use 'sass:color';
+@use '../variables' as *;
+@use '../mixins' as *;
+
+
+.navbar {
+  background-color: $navbar-bg;
+  color: $navbar-color;
+  box-shadow: $shadow;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 0;
+  
+  &__container {
+    @include make-container;
+    @include flex-between;
+    height: $navbar-height;
+    padding-top: 0;
+    padding-bottom: 0;
+    
+  }
+  
+  &__brand {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+    color: $navbar-color;
+    text-decoration: none;
+    @include flex-center;
+    gap: 0.5rem;
+    
+    &:hover {
+      color: $navbar-color;
+      text-decoration: none;
+    }
+  }
+  
+  &__toggle {
+    @include button-reset;
+    display: none;
+    color: $navbar-color;
+    font-size: 1.5rem;
+    padding: 0.5rem;
+    
+    @media (max-width: 767px) {
+      display: block;
+    }
+  }
+  
+  &__nav {
+    @include flex-center;
+    gap: $spacer * 2;
+    margin-left: 20px;
+    margin-top: revert;
+    @media (max-width: 767px) {
+      display: none;
+      position: absolute;
+      top: $navbar-height;
+      left: 0;
+      right: 0;
+      background-color: $navbar-bg;
+      flex-direction: column;
+      padding: $spacer 0;
+      box-shadow: $shadow;
+      
+      &.active {
+        display: flex;
+        
+      }
+    }
+  }
+  
+  &__link {
+    color: rgba($navbar-color, 0.9);
+    text-decoration: none;
+    padding: 0.5rem 0;
+    transition: $transition-fast;
+    
+    &:hover {
+      color: $navbar-color;
+      text-decoration: none;
+    }
+    
+    &--active {
+      color: $navbar-color;
+      font-weight: $font-weight-semibold;
+      position: relative;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background-color: $navbar-color;
+      }
+    }
+  }
+  
+  &__search {
+    @include flex-center;
+    margin-left: auto;
+    margin-right: $spacer;
+    
+    @media (max-width: 767px) {
+      width: 100%;
+      padding: 0 $spacer;
+      margin: $spacer 0;
+    }
+    
+    form {
+      @include flex-center;
+      gap: 0.5rem;
+    }
+    
+    input {
+      padding: 0.5rem 1rem;
+      border: outset;
+      border-radius: $border-radius;
+      width: 200px;
+      transition: $transition-base;
+      
+      &:focus {
+        outline: none;
+        width: 300px;
+        box-shadow: 0 0 0 3px rgba(white, 0.2);
+      }
+      
+      @media (max-width: 767px) {
+        width: 100%;
+        
+        &:focus {
+          width: 100%;
+        }
+      }
+    }
+    
+    button {
+      @include button-reset;
+      background: white;
+      color: $primary;
+      padding: 0.5rem 1rem;
+      border-radius: $border-radius;
+      transition: $transition-base;
+      
+      &:hover {
+        background: color.adjust($primary, $lightness: 40%);
+      }
+    }
+  }
+  
+  &__actions {
+    @include flex-center;
+    gap: $spacer;
+    
+    @media (max-width: 767px) {
+      width: 100%;
+      justify-content: center;
+      padding: 0 $spacer;
+      margin-top: $spacer;
+    }
+  }
+  
+  &__user {
+    position: relative;
+    
+    &-toggle {
+      @include button-reset;
+      @include flex-center;
+      gap: 0.5rem;
+      color: $navbar-color;
+      padding: 0.5rem;
+      border-radius: $border-radius;
+      transition: $transition-base;
+      
+      &:hover {
+        background: rgba(white, 0.1);
+      }
+    }
+    
+    &-dropdown {
+      position: absolute;
+      top: calc(100% + 0.5rem);
+      right: 0;
+      background: white;
+      border-radius: $border-radius;
+      box-shadow: $shadow-lg;
+      min-width: 200px;
+      padding: 0.5rem 0;
+      display: none;
+      
+      &.active {
+        display: block;
+      }
+      
+      a {
+        display: block;
+        padding: 0.75rem 0.75rem;
+        color: $dark;
+        text-decoration: none;
+        transition: $transition-fast;
+        
+        &:hover {
+          background: $gray-100;
+        }
+      }
+    }
+  }
+  
+  &__cart {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  text-decoration: none; // bỏ gạch chân
+  background-color: $primary-400; // dùng biến bạn tạo
+  color: white;
+
+  padding: 0.6rem 1.2rem;
+  border-radius: 12px;
+  font-weight: $font-weight-semibold;
+
+  transition: all 0.2s ease;
+
+  i {
+    font-size: 1rem;
+  }
+
+  &:hover {
+    background-color: $primary-800;
+    color: white;
+    text-decoration: none;
+  }
+
+  &-badge {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+
+    background-color: $danger;
+    color: white;
+
+    font-size: 0.65rem;
+    font-weight: $font-weight-bold;
+
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+
+    border-radius: 999px; // tròn hoàn toàn
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  }
+}
+}
+
+// Sidebar (Admin)
+// ==========================================================================
+.sidebar {
+  background: $secondary;
+  color: white;
+  min-height: calc(100vh - $navbar-height);
+  padding: 0;
+  
+  &__link {
+    display: flex;
+    align-items: center;
+    gap: $spacer;
+    padding: $spacer * 1.25 $spacer * 1.5;
+    color: rgba(white, 0.8);
+    text-decoration: none;
+    transition: $transition-base;
+    border-left: 3px solid transparent;
+    
+    &:hover {
+      background: color.adjust($secondary, $lightness: 5%);
+      color: white;
+      text-decoration: none;
+    }
+    
+    &--active {
+      background: color.adjust($secondary, $lightness: 10%);
+      color: white;
+      border-left-color: $primary;
+      font-weight: $font-weight-semibold;
+    }
+    
+    i {
+      font-size: 1.2rem;
+      width: 24px;
+    }
+  }
+}

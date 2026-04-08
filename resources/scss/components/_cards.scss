@@ -1,0 +1,280 @@
+// ==========================================================================
+// CARDS - Improved Card Components (Rộng rãi hơn)
+// ==========================================================================
+@use '../variables' as *;
+@use '../mixins' as *;
+
+// Base Card
+// ==========================================================================
+.card {
+  @include card;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border: $border-width solid $border-color;
+  
+  &-header {
+    padding: $spacer * 1.25 $spacer * 2;  // Tăng padding
+    background-color: $gray-100;
+    border-bottom: $border-width solid $border-color;
+    border-radius: $card-border-radius $card-border-radius 0 0;
+    
+    h1, h2, h3, h4, h5, h6 {
+      margin-bottom: 0;
+      font-size: 1.125rem;  // Tăng font-size
+    }
+  }
+  
+  &-body {
+    padding: $spacer * 2;  // Tăng padding
+    flex: 1 1 auto;
+  }
+  
+  &-footer {
+    padding: $spacer * 1.25 $spacer * 2;  // Tăng padding
+    background-color: $gray-100;
+    border-top: $border-width solid $border-color;
+  }
+  
+  &-img-top {
+    border-radius: $card-border-radius $card-border-radius 0 0;
+    width: 100%;
+  }
+  
+  &-title {
+    margin-bottom: $spacer * 0.75;
+    font-size: $h5-font-size;
+    font-weight: $font-weight-bold;
+  }
+}
+
+// Product Card - IMPROVED VERSION
+// ==========================================================================
+.product-card {
+  @include card;
+  position: relative;
+  overflow: hidden;
+  transition: $product-card-transition;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid $gray-200;
+  
+  // Hover effect mượt mà hơn
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: $product-card-hover-shadow;
+    border-color: $primary;
+  }
+  
+  // Badge giảm giá - Lớn hơn, dễ nhìn hơn
+  &__badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 10;
+    @include badge($danger);
+    font-size: 0.875rem;  // Tăng từ 0.75rem
+    font-weight: $font-weight-bold;
+    padding: 0.5rem 0.875rem;  // Tăng padding
+    box-shadow: $shadow-sm;
+  }
+  
+  // Container ảnh - Chiều cao lớn hơn
+  &__image {
+    position: relative;
+    overflow: hidden;
+    border-radius: $card-border-radius $card-border-radius 0 0;
+    background: $gray-100;
+    
+    img {
+      width: 100%;
+      height: 190px;  
+      object-fit: cover;
+      transition: transform 0.4s ease;  // Chuyển động mượt hơn
+    }
+    
+    &:hover img {
+      transform: scale(1.08);  // Giảm từ 1.1 để tự nhiên hơn
+    }
+  }
+  
+  // Body - Padding lớn hơn
+  &__body {
+    padding: $spacer * 1.75;  // Tăng từ 1.25 lên 1.75
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: $spacer * 0.75;  // Thêm gap giữa các phần tử
+  }
+  
+  // Category badge
+  &__category {
+    @include badge($secondary);
+    font-size: 0.75rem;
+    padding: 0.35rem 0.75rem;
+    align-self: flex-start;
+    border-radius: $border-radius-sm;
+  }
+  
+  // Tiêu đề sản phẩm - Lớn hơn
+  &__title {
+    font-size: 1.125rem;  // Tăng từ 1rem lên 1.125rem
+    font-weight: $font-weight-semibold;
+    margin-bottom: 0;
+    color: $dark;
+    @include line-clamp(2);
+    min-height: 2.6em;  // Điều chỉnh theo font-size mới
+    line-height: 1.3;
+  }
+  
+  // Mô tả - Thoáng hơn
+  &__description {
+    font-size: 0.9375rem;  // Tăng từ 0.875rem
+    color: $gray-600;
+    line-height: 1.6;
+    @include line-clamp(3);  // Tăng từ 2 lên 3 dòng
+    flex: 1;
+    margin-bottom: 0;
+  }
+  
+  // Giá - Nổi bật hơn
+  &__price {
+    margin-top: auto;  // Đẩy xuống dưới
+    padding-top: $spacer * 0.75;
+    
+    &-old {
+      font-size: 0.9375rem;  // Tăng từ 0.875rem
+      color: $gray-500;
+      text-decoration: line-through;
+      display: block;
+      margin-bottom: 0.35rem;
+    }
+    
+    &-current {
+      font-size: 1.375rem;  // Tăng từ 1.25rem lên 1.375rem
+      font-weight: $font-weight-bold;
+      color: $danger;
+      display: block;
+    }
+  }
+  
+  // Actions - Buttons rộng hơn
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem; 
+    margin-top: $spacer;
+    
+    .btn {
+      width: 100%;
+      padding: 0.625rem 1rem;  // Padding lớn hơn
+      font-size: 0.9375rem;
+      font-weight: $font-weight-semibold;
+    }
+    
+  }
+  
+  // Product Card Grid - IMPROVED
+  &-grid {
+    display: grid;
+    gap: $spacer * 2.5;  // Tăng từ $spacer * 2 lên 2.5
+    
+    // Mobile: 1 cột
+    grid-template-columns: 1fr;
+    
+    // Small tablets: 2 cột
+    @include respond-to(sm) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    // Tablets: 2 cột (vẫn rộng rãi)
+    @include respond-to(md) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: $spacer * 3;  // Khoảng cách lớn hơn trên tablet
+    }
+    
+    // Desktop: 3 cột (giảm từ 4 xuống 3 để card rộng hơn)
+    @include respond-to(lg) {
+      grid-template-columns: repeat(3, 1fr);
+      gap: $spacer * 3;
+    }
+    
+    // Large desktop: 3-4 cột
+    @include respond-to(xl) {
+      grid-template-columns: repeat(3, 1fr);
+      gap: $spacer * 3.5;
+    }
+  }
+}
+
+// Stats Card (Admin Dashboard) - IMPROVED
+// ==========================================================================
+.stats-card {
+  @include card;
+  border-left: 4px solid $primary;
+  transition: $transition-base;
+  padding: $spacer * 2;  // Tăng padding
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: $shadow-lg;
+  }
+  
+  &__content {
+    @include flex-between;
+    gap: $spacer * 1.5;  // Thêm gap
+  }
+  
+  &__info {
+    flex: 1;
+    
+    h6 {
+      color: $gray-600;
+      font-size: 0.9375rem;  // Tăng font-size
+      margin-bottom: 0.75rem;
+      font-weight: $font-weight-semibold;
+    }
+    
+    h2 {
+      color: $dark;
+      margin-bottom: 0;
+      font-size: 2.25rem;  // Lớn hơn
+      font-weight: $font-weight-bold;
+    }
+  }
+  
+  &__icon {
+    font-size: 3.5rem;  // Tăng từ 3rem
+    color: $primary;
+    opacity: 0.7;
+    transition: $transition-base;
+  }
+  
+  &:hover &__icon {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  
+  // Color Variants
+  &--primary {
+    border-left-color: $primary;
+    .stats-card__icon { color: $primary; }
+  }
+  
+  &--success {
+    border-left-color: $success;
+    .stats-card__icon { color: $success; }
+  }
+  
+  &--warning {
+    border-left-color: $warning;
+    .stats-card__icon { color: $warning; }
+  }
+  
+  &--danger {
+    border-left-color: $danger;
+    .stats-card__icon { color: $danger; }
+  }
+}
+

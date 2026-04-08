@@ -1,0 +1,164 @@
+@use 'sass:color';
+@use '../variables' as *;
+@use '../mixins' as *;
+
+// ==========================================================================
+// FORMS - Form Components
+// ==========================================================================
+
+// Form Group
+// ==========================================================================
+.form-group {
+  margin-bottom: $spacer * 1.5;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// Form Label
+// ==========================================================================
+.form-label {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  font-weight: $font-weight-semibold;
+  color: $gray-700;
+  
+  &--required {
+    &::after {
+      content: '*';
+      color: $danger;
+      margin-left: 0.25rem;
+    }
+  }
+}
+
+// Form Control
+// ==========================================================================
+.form-control {
+  display: block;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+  color: $gray-900;
+  background-color: white;
+  border: $border-width solid $input-border-color;
+  border-radius: $input-border-radius;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  
+  @include placeholder {
+    color: $gray-500;
+  }
+  
+  &:focus {
+    color: $gray-900;
+    background-color: white;
+    border-color: $input-focus-border-color;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba($primary, 0.25);
+  }
+  
+  &:disabled {
+    background-color: $gray-200;
+    opacity: 1;
+    cursor: not-allowed;
+  }
+  
+  // Sizes
+  &-sm {
+    padding: 0.5rem 0.75rem;
+    font-size: $font-size-sm;
+  }
+  
+  &-lg {
+    padding: 1rem 1.25rem;
+    font-size: $font-size-lg;
+  }
+}
+
+// Textarea
+// ==========================================================================
+textarea.form-control {
+  min-height: 100px;
+  resize: vertical;
+}
+
+// Select
+// ==========================================================================
+select.form-control {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 16px 12px;
+  padding-right: 2.5rem;
+}
+
+// Checkbox & Radio
+// ==========================================================================
+.form-check {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  
+  &-input {
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-right: 0.5rem;
+    cursor: pointer;
+    
+    &:focus {
+      border-color: $input-focus-border-color;
+      box-shadow: 0 0 0 0.2rem rgba($primary, 0.25);
+    }
+  }
+  
+  &-label {
+    cursor: pointer;
+    margin-bottom: 0;
+  }
+}
+
+// Form Text
+// ==========================================================================
+.form-text {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: $font-size-sm;
+  color: $gray-600;
+}
+
+// Validation
+// ==========================================================================
+.is-valid {
+  border-color: $success;
+  
+  &:focus {
+    border-color: $success;
+    box-shadow: 0 0 0 0.2rem rgba($success, 0.25);
+  }
+}
+
+.is-invalid {
+  border-color: $danger;
+  
+  &:focus {
+    border-color: $danger;
+    box-shadow: 0 0 0 0.2rem rgba($danger, 0.25);
+  }
+}
+
+.valid-feedback {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: $font-size-sm;
+  color: $success;
+}
+
+.invalid-feedback {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: $font-size-sm;
+  color: $danger;
+}

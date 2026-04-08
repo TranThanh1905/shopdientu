@@ -1,0 +1,600 @@
+// ==========================================================================
+// BUTTONS - Override Bootstrap button styles
+// ==========================================================================
+
+@use 'sass:map';
+@use 'sass:color';
+@use '../variables' as *;
+@use '../mixins' as *;
+
+// Base Button Styles (Override Bootstrap)
+// ==========================================================================
+.btn {
+  @include button-base;
+  position: relative;
+  overflow: hidden;
+  font-family: $font-family-base;
+  font-weight: $btn-font-weight;
+  border-radius: $btn-border-radius;
+  box-shadow: $btn-shadow;
+  transition: $transition-base;
+
+  // Hover state
+  &:hover {
+    box-shadow: $btn-shadow-hover;
+    transform: translateY(-1px);
+  }
+
+  // Active state
+  &:active {
+    transform: translateY(0);
+    box-shadow: $shadow-sm;
+  }
+
+  // Disabled state
+  &:disabled,
+  &.disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+    pointer-events: none;
+  }
+
+  // Focus state (accessibility)
+  &:focus,
+  &:focus-visible {
+    outline: 0;
+    box-shadow: 0 0 0 3px $primary-alpha-20;
+  }
+}
+
+// Primary Button
+// ==========================================================================
+.btn-primary {
+  @include button-variant($primary);
+  background-color: $primary !important;
+  border-color: $primary !important;
+  color: white !important;
+
+  &:hover {
+    background-color: $primary-600 !important;
+    border-color: $primary-600 !important;
+  }
+
+  &:active,
+  &.active {
+    background-color: $primary-700 !important;
+    border-color: $primary-700 !important;
+  }
+
+  &:focus,
+  &:focus-visible {
+    box-shadow: 0 0 0 3px $primary-alpha-20 !important;
+  }
+}
+
+// Secondary Button
+// ==========================================================================
+.btn-secondary {
+  @include button-variant($secondary);
+  background-color: $secondary !important;
+  border-color: $secondary !important;
+  color: white !important;
+
+  &:hover {
+    background-color: $secondary-600 !important;
+    border-color: $secondary-600 !important;
+  }
+
+  &:active,
+  &.active {
+    background-color: $secondary-700 !important;
+    border-color: $secondary-700 !important;
+  }
+
+  &:focus,
+  &:focus-visible {
+    box-shadow: 0 0 0 3px $secondary-alpha-20 !important;
+  }
+}
+
+// Success Button
+// ==========================================================================
+.btn-success {
+  @include button-variant($success);
+  background-color: $success !important;
+  border-color: $success !important;
+  color: white !important;
+
+  &:hover {
+    background-color: color.scale($success, $lightness: -8%) !important;
+    border-color: color.scale($success, $lightness: -8%) !important;
+  }
+
+  &:active,
+  &.active {
+    background-color: color.scale($success, $lightness: -12%) !important;
+    border-color: color.scale($success, $lightness: -12%) !important;
+  }
+
+  &:focus,
+  &:focus-visible {
+    box-shadow: 0 0 0 3px rgba($success, 0.2) !important;
+  }
+}
+
+// Danger Button
+// ==========================================================================
+.btn-danger {
+  @include button-variant($danger);
+  background-color: $danger !important;
+  border-color: $danger !important;
+  color: white !important;
+
+  &:hover {
+    background-color: color.scale($danger, $lightness: -8%) !important;
+    border-color: color.scale($danger, $lightness: -8%) !important;
+  }
+
+  &:active,
+  &.active {
+    background-color: color.scale($danger, $lightness: -12%) !important;
+    border-color: color.scale($danger, $lightness: -12%) !important;
+  }
+
+  &:focus,
+  &:focus-visible {
+    box-shadow: 0 0 0 3px rgba($danger, 0.2) !important;
+  }
+}
+
+// Warning Button
+// ==========================================================================
+.btn-warning {
+  @include button-variant($warning);
+  background-color: $warning !important;
+  border-color: $warning !important;
+  color: $gray-900 !important;
+
+  &:hover {
+    background-color: color.scale($warning, $lightness: -8%) !important;
+    border-color: color.scale($warning, $lightness: -8%) !important;
+    color: $gray-900 !important;
+  }
+
+  &:active,
+  &.active {
+    background-color: color.scale($warning, $lightness: -12%) !important;
+    border-color: color.scale($warning, $lightness: -12%) !important;
+  }
+
+  &:focus,
+  &:focus-visible {
+    box-shadow: 0 0 0 3px rgba($warning, 0.2) !important;
+  }
+}
+
+// Info Button
+// ==========================================================================
+.btn-info {
+  @include button-variant($info);
+  background-color: $info !important;
+  border-color: $info !important;
+  color: white !important;
+
+  &:hover {
+    background-color: $primary-600 !important;
+    border-color: $primary-600 !important;
+  }
+
+  &:active,
+  &.active {
+    background-color: $primary-700 !important;
+    border-color: $primary-700 !important;
+  }
+
+  &:focus,
+  &:focus-visible {
+    box-shadow: 0 0 0 3px $primary-alpha-20 !important;
+  }
+}
+
+// Light Button
+// ==========================================================================
+.btn-light {
+  background-color: $light !important;
+  border-color: $gray-200 !important;
+  color: $gray-900 !important;
+
+  &:hover {
+    background-color: $gray-100 !important;
+    border-color: $gray-300 !important;
+    color: $gray-900 !important;
+  }
+
+  &:active,
+  &.active {
+    background-color: $gray-200 !important;
+    border-color: $gray-400 !important;
+  }
+
+  &:focus,
+  &:focus-visible {
+    box-shadow: 0 0 0 3px rgba($gray-500, 0.15) !important;
+  }
+}
+
+// Dark Button
+// ==========================================================================
+.btn-dark {
+  @include button-variant($dark);
+  background-color: $dark !important;
+  border-color: $dark !important;
+  color: white !important;
+
+  &:hover {
+    background-color: color.scale($dark, $lightness: 8%) !important;
+    border-color: color.scale($dark, $lightness: 8%) !important;
+  }
+
+  &:active,
+  &.active {
+    background-color: color.scale($dark, $lightness: 12%) !important;
+    border-color: color.scale($dark, $lightness: 12%) !important;
+  }
+
+  &:focus,
+  &:focus-visible {
+    box-shadow: 0 0 0 3px rgba($dark, 0.5) !important;
+  }
+}
+
+// Outline Variants
+// ==========================================================================
+.btn-outline-primary {
+  background-color: transparent !important;
+  border-color: $primary !important;
+  color: $primary !important;
+
+  &:hover {
+    background-color: $primary !important;
+    border-color: $primary !important;
+    color: white !important;
+  }
+
+  &:focus,
+  &:focus-visible {
+    box-shadow: 0 0 0 3px $primary-alpha-20 !important;
+  }
+}
+
+.btn-outline-secondary {
+  background-color: transparent !important;
+  border-color: $secondary !important;
+  color: $secondary !important;
+
+  &:hover {
+    background-color: $secondary !important;
+    border-color: $secondary !important;
+    color: white !important;
+  }
+
+  &:focus,
+  &:focus-visible {
+    box-shadow: 0 0 0 3px $secondary-alpha-20 !important;
+  }
+}
+
+.btn-outline-success {
+  background-color: transparent !important;
+  border-color: $success !important;
+  color: $success !important;
+
+  &:hover {
+    background-color: $success !important;
+    border-color: $success !important;
+    color: white !important;
+  }
+
+  &:focus,
+  &:focus-visible {
+    box-shadow: 0 0 0 3px rgba($success, 0.2) !important;
+  }
+}
+
+.btn-outline-danger {
+  background-color: transparent !important;
+  border-color: $danger !important;
+  color: $danger !important;
+
+  &:hover {
+    background-color: $danger !important;
+    border-color: $danger !important;
+    color: white !important;
+  }
+
+  &:focus,
+  &:focus-visible {
+    box-shadow: 0 0 0 3px rgba($danger, 0.2) !important;
+  }
+}
+
+.btn-outline-warning {
+  background-color: transparent !important;
+  border-color: $warning !important;
+  color: $warning !important;
+
+  &:hover {
+    background-color: $warning !important;
+    border-color: $warning !important;
+    color: $gray-900 !important;
+  }
+
+  &:focus,
+  &:focus-visible {
+    box-shadow: 0 0 0 3px rgba($warning, 0.2) !important;
+  }
+}
+
+.btn-outline-dark {
+  background-color: transparent !important;
+  border-color: $dark !important;
+  color: $dark !important;
+
+  &:hover {
+    background-color: $dark !important;
+    border-color: $dark !important;
+    color: white !important;
+  }
+
+  &:focus,
+  &:focus-visible {
+    box-shadow: 0 0 0 3px rgba($dark, 0.3) !important;
+  }
+}
+
+// Button Sizes
+// ==========================================================================
+.btn-sm {
+  padding: 0.375rem 0.75rem !important;
+  font-size: $font-size-sm !important;
+  border-radius: $border-radius-sm !important;
+  line-height: 1.5 !important;
+}
+
+.btn-lg {
+  padding: 0.75rem 1.5rem !important;
+  font-size: $font-size-lg !important;
+  border-radius: $border-radius-md !important;
+  line-height: 1.5 !important;
+}
+
+// Block Button
+// ==========================================================================
+.btn-block {
+  display: block !important;
+  width: 100% !important;
+}
+
+// Icon Buttons
+// ==========================================================================
+.btn-icon {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  i,
+  svg {
+    font-size: 1.125em;
+    line-height: 1;
+  }
+}
+
+// Icon Only Button (Square)
+.btn-icon-only {
+  padding: $btn-padding-y !important;
+  width: calc(#{$btn-padding-y} * 2 + 1.5rem);
+  height: calc(#{$btn-padding-y} * 2 + 1.5rem);
+
+  &.btn-sm {
+    padding: 0.5rem !important;
+    width: calc(0.5rem * 2 + 1.25rem);
+    height: calc(0.5rem * 2 + 1.25rem);
+  }
+
+  &.btn-lg {
+    padding: 0.875rem !important;
+    width: calc(0.875rem * 2 + 1.75rem);
+    height: calc(0.875rem * 2 + 1.75rem);
+  }
+}
+
+// Rounded Buttons
+// ==========================================================================
+.btn-rounded {
+  border-radius: $border-radius-full !important;
+}
+
+// Gradient Buttons (Custom)
+// ==========================================================================
+.btn-gradient-primary {
+  @include gradient-bg($primary-400, $primary-700, 135deg);
+  border: none !important;
+  color: white !important;
+
+  &:hover {
+    @include gradient-bg($primary-500, $primary-800, 135deg);
+  }
+}
+
+.btn-gradient-secondary {
+  @include gradient-bg($secondary-400, $secondary-700, 135deg);
+  border: none !important;
+  color: white !important;
+
+  &:hover {
+    @include gradient-bg($secondary-500, $secondary-800, 135deg);
+  }
+}
+
+// Loading State
+// ==========================================================================
+.btn-loading {
+  position: relative;
+  pointer-events: none;
+  opacity: 0.7;
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 1rem;
+    height: 1rem;
+    top: 50%;
+    left: 50%;
+    margin-left: -0.5rem;
+    margin-top: -0.5rem;
+    border: 2px solid transparent;
+    border-top-color: currentColor;
+    border-radius: 50%;
+    animation: btn-loading-spinner 0.6s linear infinite;
+  }
+
+  span {
+    opacity: 0;
+  }
+}
+
+@keyframes btn-loading-spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// Button Group Override
+// ==========================================================================
+.btn-group {
+  .btn {
+    margin-right: 0 !important;
+
+    &:not(:first-child) {
+      border-top-left-radius: 0 !important;
+      border-bottom-left-radius: 0 !important;
+    }
+
+    &:not(:last-child) {
+      border-top-right-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+      border-right-width: 0 !important;
+    }
+  }
+}
+
+// Form buttons - Đặc biệt cho buttons trong form
+// ==========================================================================
+form {
+  .btn {
+    &:not(:last-child) {
+      margin-right: 0.5rem;
+    }
+  }
+}
+
+// Buttons với icon (Font Awesome)
+// ==========================================================================
+.btn {
+  i,
+  .fas,
+  .far,
+  .fab {
+    margin-right: 0.375rem;
+    
+    &:last-child {
+      margin-right: 0;
+      margin-left: 0.375rem;
+    }
+    
+    &:only-child {
+      margin: 0;
+    }
+  }
+}
+
+// Floating Action Button (FAB)
+// ==========================================================================
+.btn-fab {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50% !important;
+  box-shadow: $shadow-lg !important;
+  z-index: map.get($z-index, fixed);
+
+  &:hover {
+    box-shadow: $shadow-xl !important;
+    transform: scale(1.1);
+  }
+
+  i,
+  svg {
+    font-size: 1.5rem;
+  }
+}
+
+// Social Buttons (Optional)
+// ==========================================================================
+.btn-facebook {
+  background-color: #1877f2 !important;
+  border-color: #1877f2 !important;
+  color: white !important;
+
+  &:hover {
+    background-color: color.scale(#1877f2, $lightness: -8%) !important;
+  }
+}
+
+.btn-google {
+  background-color: #ea4335 !important;
+  border-color: #ea4335 !important;
+  color: white !important;
+
+  &:hover {
+    background-color: color.scale(#ea4335, $lightness: -8%) !important;
+  }
+}
+
+.btn-twitter {
+  background-color: #1da1f2 !important;
+  border-color: #1da1f2 !important;
+  color: white !important;
+
+  &:hover {
+    background-color: color.scale(#1da1f2, $lightness: -8%) !important;
+  }
+}
+
+// Alert Close Button (Bootstrap override)
+// ==========================================================================
+.btn-close {
+  padding: 0.25rem !important;
+  background: transparent !important;
+  border: 0 !important;
+  opacity: 0.5;
+  transition: $transition-fast;
+  box-shadow: none !important;
+  
+  &:hover {
+    opacity: 1;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+  
+  &:focus,
+  &:focus-visible {
+    box-shadow: none !important;
+    opacity: 1;
+  }
+}

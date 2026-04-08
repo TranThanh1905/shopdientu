@@ -1,0 +1,203 @@
+// ==========================================================================
+// BASE - Reset & Base Styles
+// ==========================================================================
+
+@use 'sass:color';
+@use 'sass:map';
+@use 'variables' as *;
+@use 'mixins' as *;
+
+// Box Sizing
+// ==========================================================================
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+// HTML & Body
+// ==========================================================================
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  font-weight: $font-weight-normal;
+  line-height: $line-height-base;
+  color: $gray-900;
+  background-color: $gray-100;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Typography
+// ==========================================================================
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-family-heading;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-sm;
+  margin-bottom: $spacer;
+  color: $dark;
+}
+
+h1 { font-size: $h1-font-size; }
+h2 { font-size: $h2-font-size; }
+h3 { font-size: $h3-font-size; }
+h4 { font-size: $h4-font-size; }
+h5 { font-size: $h5-font-size; }
+h6 { font-size: $h6-font-size; }
+
+p {
+  margin-bottom: $spacer;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// Links
+// ==========================================================================
+a {
+  color: $primary;
+  text-decoration: none;
+  transition: $transition-fast;
+  
+  &:hover {
+    color: color.adjust($primary, $lightness: -15%);
+    text-decoration: underline;
+  }
+}
+
+// Images
+// ==========================================================================
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+// Lists
+// ==========================================================================
+ul, ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+// Container
+// ==========================================================================
+.container {
+  @include make-container;
+  
+  @include respond-to(sm) {
+    max-width: map.get($container-max-widths, sm);
+  }
+  
+  @include respond-to(md) {
+    max-width: map.get($container-max-widths, md);
+  }
+  
+  @include respond-to(lg) {
+    max-width: map.get($container-max-widths, lg);
+  }
+  
+  @include respond-to(xl) {
+    max-width: map.get($container-max-widths, xl);
+  }
+}
+
+// Text Utilities
+// ==========================================================================
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.text-primary { color: $primary; }
+.text-secondary { color: $secondary; }
+.text-success { color: $success; }
+.text-danger { color: $danger; }
+.text-warning { color: $warning; }
+.text-muted { color: $gray-600; }
+.text-white { color: white; }
+
+// Background Utilities
+// ==========================================================================
+.bg-primary { background-color: $primary; color: white; }
+.bg-secondary { background-color: $secondary; color: white; }
+.bg-success { background-color: $success; color: white; }
+.bg-danger { background-color: $danger; color: white; }
+.bg-warning { background-color: $warning; color: white; }
+.bg-light { background-color: $light; }
+.bg-white { background-color: white; }
+
+// Spacing Utilities
+// ==========================================================================
+@each $prop, $abbrev in (margin: m, padding: p) {
+  @each $size, $length in $spacers {
+    .#{$abbrev}-#{$size} { #{$prop}: $length; }
+    .#{$abbrev}t-#{$size} { #{$prop}-top: $length; }
+    .#{$abbrev}r-#{$size} { #{$prop}-right: $length; }
+    .#{$abbrev}b-#{$size} { #{$prop}-bottom: $length; }
+    .#{$abbrev}l-#{$size} { #{$prop}-left: $length; }
+    .#{$abbrev}x-#{$size} {
+      #{$prop}-left: $length;
+      #{$prop}-right: $length;
+    }
+    .#{$abbrev}y-#{$size} {
+      #{$prop}-top: $length;
+      #{$prop}-bottom: $length;
+    }
+  }
+}
+
+// Display Utilities
+// ==========================================================================
+.d-none { display: none; }
+.d-block { display: block; }
+.d-inline { display: inline; }
+.d-inline-block { display: inline-block; }
+.d-flex { display: flex; }
+
+// Flex Utilities
+// ==========================================================================
+.flex-row { flex-direction: row; }
+.flex-column { flex-direction: column; }
+.flex-wrap { flex-wrap: wrap; }
+
+.justify-content-start { justify-content: flex-start; }
+.justify-content-end { justify-content: flex-end; }
+.justify-content-center { justify-content: center; }
+.justify-content-between { justify-content: space-between; }
+
+.align-items-start { align-items: flex-start; }
+.align-items-end { align-items: flex-end; }
+.align-items-center { align-items: center; }
+
+.flex-grow-1 { flex-grow: 1; }
+
+// Border Radius
+// ==========================================================================
+.rounded { border-radius: $border-radius; }
+.rounded-sm { border-radius: $border-radius-sm; }
+.rounded-lg { border-radius: $border-radius-lg; }
+.rounded-xl { border-radius: $border-radius-xl; }
+.rounded-circle { border-radius: 50%; }
+
+// Shadows
+// ==========================================================================
+.shadow-sm { box-shadow: $shadow-sm; }
+.shadow { box-shadow: $shadow; }
+.shadow-lg { box-shadow: $shadow-lg; }
+
+// Other Utilities
+// ==========================================================================
+.text-decoration-none { text-decoration: none; }
+.text-decoration-line-through { text-decoration: line-through; }
+.fw-bold { font-weight: $font-weight-bold; }
+.fw-semibold { font-weight: $font-weight-semibold; }
+.fw-normal { font-weight: $font-weight-normal; }

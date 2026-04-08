@@ -1,0 +1,297 @@
+// resources/scss/components/_orders.scss
+@use '../variables' as *;
+@use "sass:map";
+@use "sass:color";
+
+/* =========================================================
+   ORDERS MODULE
+   Áp dụng cho:
+   - orders/index.blade.php
+   - orders/show.blade.php
+========================================================= */
+
+
+/* =========================================================
+   1. ACCOUNT SIDEBAR
+========================================================= */
+
+.account-card {
+    border: none;
+    border-radius: $border-radius-xl;
+    overflow: hidden;
+    box-shadow: $shadow;
+    transition: $transition-base;
+
+    &:hover {
+        transform: translateY(-3px);
+        box-shadow: $shadow-lg;
+    }
+
+    .account-header {
+        background: linear-gradient(
+            135deg,
+            $primary 0%,
+            color.adjust($primary, $lightness: -8%) 100%
+        );
+        padding: map.get($spacers, 4);
+        font-weight: $font-weight-semibold;
+    }
+
+    .list-group {
+        border: none;
+    }
+
+    .list-group-item {
+        border: none !important;
+        padding: map.get($spacers, 3) map.get($spacers, 4);
+        font-weight: $font-weight-medium;
+        transition: $transition-base;
+        color: $gray-700;
+
+        i {
+            width: 20px;
+        }
+
+        &:hover {
+            background: $gray-50;
+            padding-left: map.get($spacers, 5);
+            color: $primary;
+        }
+
+        &.active {
+            background: $primary;
+            color: white;
+            font-weight: $font-weight-semibold;
+
+            .badge {
+                background: white !important;
+                color: $primary !important;
+            }
+        }
+
+        .badge {
+            font-size: $font-size-xs;
+        }
+    }
+}
+
+
+/* =========================================================
+   2. STATUS FILTER (NAV PILLS)
+========================================================= */
+
+.nav-pills {
+    background: $gray-50;
+    padding: map.get($spacers, 3);
+    border-radius: $border-radius-lg;
+
+    .nav-link {
+        border-radius: $border-radius-full;
+        font-weight: $font-weight-medium;
+        color: $gray-600;
+        transition: $transition-base;
+
+        &.active {
+            background: $primary;
+            color: white;
+            box-shadow: $shadow-primary;
+        }
+
+        &:hover:not(.active) {
+            background: white;
+            color: $primary;
+        }
+
+        .badge {
+            font-size: $font-size-xs;
+        }
+    }
+}
+
+
+/* =========================================================
+   3. ORDERS LIST (INDEX PAGE)
+========================================================= */
+
+.orders-list {
+
+    .card {
+        border-radius: $border-radius-lg;
+        transition: $transition-base;
+        box-shadow: $shadow;
+
+        &:hover {
+            transform: translateY(-3px);
+            box-shadow: $shadow-lg;
+        }
+
+        .card-header {
+            background: $gray-50 !important;
+            padding: map.get($spacers, 4);
+
+            small {
+                font-size: $font-size-xs;
+                color: $gray-600;
+            }
+
+            strong {
+                font-weight: $font-weight-semibold;
+            }
+
+            .badge {
+                font-size: $font-size-sm;
+                padding: map.get($spacers, 2) map.get($spacers, 3);
+            }
+        }
+
+        .card-body {
+            padding: map.get($spacers, 4);
+
+            .order-products {
+
+                .d-flex {
+                    padding: map.get($spacers, 3) 0;
+                    transition: $transition-fast;
+
+                    &:hover {
+                        background: $gray-50;
+                        border-radius: $border-radius;
+                    }
+
+                    img {
+                        border-radius: $border-radius;
+                        border: 1px solid $border-color;
+                        transition: $transition-fast;
+
+                        &:hover {
+                            transform: scale(1.05);
+                        }
+                    }
+
+                    h6 {
+                        font-size: $font-size-sm;
+                        font-weight: $font-weight-semibold;
+                    }
+
+                    small {
+                        font-size: $font-size-xs;
+                    }
+                }
+            }
+
+            .alert {
+                border-radius: $border-radius;
+                font-size: $font-size-sm;
+            }
+        }
+
+        .card-footer {
+            background: white !important;
+            padding: map.get($spacers, 4);
+
+            .btn {
+                transition: $transition-base;
+
+                &:hover {
+                    transform: translateY(-1px);
+                    box-shadow: $shadow-md;
+                }
+            }
+        }
+    }
+}
+
+
+/* =========================================================
+   4. ORDER DETAIL PAGE (SHOW)
+========================================================= */
+
+.table-responsive {
+
+    .table {
+
+        thead th {
+            background: $gray-50;
+            font-weight: $font-weight-semibold;
+            font-size: $font-size-sm;
+        }
+
+        tbody tr {
+            transition: $transition-fast;
+
+            &:hover {
+                background: $gray-50;
+            }
+
+            td {
+                vertical-align: middle;
+            }
+
+            img {
+                border-radius: $border-radius;
+                border: 1px solid $border-color;
+            }
+        }
+
+        tfoot {
+            background: $gray-50;
+            font-weight: $font-weight-semibold;
+        }
+    }
+}
+
+
+/* =========================================================
+   5. MODAL (CANCEL ORDER)
+========================================================= */
+
+.modal-content {
+    border-radius: $border-radius-lg;
+    border: none;
+    box-shadow: $shadow-lg;
+
+    .modal-header {
+        background: $gray-50;
+        border-bottom: 1px solid $border-color;
+    }
+
+    .modal-footer {
+        background: $gray-50;
+    }
+}
+
+
+/* =========================================================
+   6. RESPONSIVE
+========================================================= */
+
+@media (max-width: map.get($breakpoints, md)) {
+
+    .orders-list .card-header .row > div {
+        margin-bottom: map.get($spacers, 3);
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    .orders-list .card-footer .d-flex {
+        flex-direction: column;
+        gap: map.get($spacers, 3);
+
+        .btn {
+            width: 100%;
+        }
+    }
+}
+
+@media (max-width: map.get($breakpoints, sm)) {
+
+    .nav-pills {
+        padding: map.get($spacers, 2);
+
+        .nav-link {
+            font-size: $font-size-sm;
+        }
+    }
+}

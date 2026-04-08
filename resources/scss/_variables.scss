@@ -1,0 +1,285 @@
+@use "sass:map";
+@use "sass:math";
+@use "sass:color";
+
+// VARIABLES - Biến SCSS cho toàn bộ project (IMPROVED COLOR SYSTEM)
+
+// Base Color Channels - Kênh màu cơ bản (RGB)
+// ==========================================================================
+$base-blue: (
+  r: 32,
+  g: 90,
+  b: 167
+);
+
+$base-orange: (
+  r: 251,
+  g: 146,
+  b: 60
+);
+
+// Helper function để tạo màu từ RGB channels
+@function rgb-color($r, $g, $b) {
+  @return rgb($r, $g, $b);
+}
+
+// Helper function để điều chỉnh độ sáng linear
+@function lighten-linear($r, $g, $b, $percent) {
+  $factor: math.div($percent, 100);
+  $new-r: $r + (255 - $r) * $factor;
+  $new-g: $g + (255 - $g) * $factor;
+  $new-b: $b + (255 - $b) * $factor;
+  @return rgb($new-r, $new-g, $new-b);
+}
+
+@function darken-linear($r, $g, $b, $percent) {
+  $factor: math.div($percent, 100);
+  $new-r: $r * (1 - $factor);
+  $new-g: $g * (1 - $factor);
+  $new-b: $b * (1 - $factor);
+  @return rgb($new-r, $new-g, $new-b);
+}
+
+// Primary Color Scale - Thang màu chính (Blue channel)
+// ==========================================================================
+$primary-50: lighten-linear(map.get($base-blue, r), map.get($base-blue, g), map.get($base-blue, b), 45);
+$primary-100: lighten-linear(map.get($base-blue, r), map.get($base-blue, g), map.get($base-blue, b), 35);
+$primary-200: lighten-linear(map.get($base-blue, r), map.get($base-blue, g), map.get($base-blue, b), 25);
+$primary-300: lighten-linear(map.get($base-blue, r), map.get($base-blue, g), map.get($base-blue, b), 15);
+$primary-400: lighten-linear(map.get($base-blue, r), map.get($base-blue, g), map.get($base-blue, b), 8);
+$primary: rgb-color(map.get($base-blue, r), map.get($base-blue, g), map.get($base-blue, b));
+$primary-600: darken-linear(map.get($base-blue, r), map.get($base-blue, g), map.get($base-blue, b), 12);
+$primary-700: darken-linear(map.get($base-blue, r), map.get($base-blue, g), map.get($base-blue, b), 20);
+$primary-800: darken-linear(map.get($base-blue, r), map.get($base-blue, g), map.get($base-blue, b), 30);
+$primary-900: darken-linear(map.get($base-blue, r), map.get($base-blue, g), map.get($base-blue, b), 40);
+$primary-500: $primary;
+
+// Secondary Color Scale - Thang màu phụ (Orange channel)
+// ==========================================================================
+$secondary-50: lighten-linear(map.get($base-orange, r), map.get($base-orange, g), map.get($base-orange, b), 45);
+$secondary-100: lighten-linear(map.get($base-orange, r), map.get($base-orange, g), map.get($base-orange, b), 35);
+$secondary-200: lighten-linear(map.get($base-orange, r), map.get($base-orange, g), map.get($base-orange, b), 25);
+$secondary-300: lighten-linear(map.get($base-orange, r), map.get($base-orange, g), map.get($base-orange, b), 15);
+$secondary-400: lighten-linear(map.get($base-orange, r), map.get($base-orange, g), map.get($base-orange, b), 8);
+$secondary: rgb-color(map.get($base-orange, r), map.get($base-orange, g), map.get($base-orange, b));
+$secondary-600: darken-linear(map.get($base-orange, r), map.get($base-orange, g), map.get($base-orange, b), 12);
+$secondary-700: darken-linear(map.get($base-orange, r), map.get($base-orange, g), map.get($base-orange, b), 20);
+$secondary-800: darken-linear(map.get($base-orange, r), map.get($base-orange, g), map.get($base-orange, b), 30);
+$secondary-900: darken-linear(map.get($base-orange, r), map.get($base-orange, g), map.get($base-orange, b), 40);
+$secondary-500: $secondary;
+
+// Alpha Variants
+// ==========================================================================
+$primary-alpha-10: rgba(map.get($base-blue, r), map.get($base-blue, g), map.get($base-blue, b), 0.1);
+$primary-alpha-20: rgba(map.get($base-blue, r), map.get($base-blue, g), map.get($base-blue, b), 0.2);
+$primary-alpha-50: rgba(map.get($base-blue, r), map.get($base-blue, g), map.get($base-blue, b), 0.5);
+
+$secondary-alpha-10: rgba(map.get($base-orange, r), map.get($base-orange, g), map.get($base-orange, b), 0.1);
+$secondary-alpha-20: rgba(map.get($base-orange, r), map.get($base-orange, g), map.get($base-orange, b), 0.2);
+$secondary-alpha-50: rgba(map.get($base-orange, r), map.get($base-orange, g), map.get($base-orange, b), 0.5);
+
+
+// Semantic Colors - Màu ngữ nghĩa (derived from 2 main channels)
+// ==========================================================================
+$success: rgb(34, 197, 94);        // Green - tạo từ blue channel + adjustment
+$danger: rgb(239, 68, 68);         // Red - tạo từ orange channel + adjustment
+$warning: rgb(251, 191, 36);       // Amber - gần với orange channel
+$info: $primary-400;               // Sử dụng primary lighter
+$light: rgb(248, 250, 252);
+$dark: rgb(15, 23, 42);
+
+// Gray Scale - Thang màu xám (Linear progression)
+// ==========================================================================
+$gray-50: rgb(248, 250, 252);
+$gray-100: rgb(241, 245, 249);
+$gray-200: rgb(226, 232, 240);
+$gray-300: rgb(203, 213, 225);
+$gray-400: rgb(148, 163, 184);
+$gray-500: rgb(100, 116, 139);
+$gray-600: rgb(71, 85, 105);
+$gray-700: rgb(51, 65, 85);
+$gray-800: rgb(30, 41, 59);
+$gray-900: rgb(15, 23, 42);
+
+
+// Typography - Chữ
+// ==========================================================================
+$font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+$font-family-heading: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+$font-family-mono: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, monospace;
+
+$font-size-base: 1rem;      // 16px
+$font-size-lg: 1.125rem;    // 18px
+$font-size-sm: 0.875rem;    // 14px
+$font-size-xs: 0.75rem;     // 12px
+
+$h1-font-size: 2.25rem;     // 36px
+$h2-font-size: 1.875rem;    // 30px
+$h3-font-size: 1.5rem;      // 24px
+$h4-font-size: 1.25rem;     // 20px
+$h5-font-size: 1.125rem;    // 18px
+$h6-font-size: 1rem;        // 16px
+
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$font-weight-extrabold: 800;
+
+$line-height-base: 1.6;
+$line-height-sm: 1.4;
+$line-height-lg: 1.8;
+
+// Spacing - Khoảng cách (Consistent 8px grid)
+// ==========================================================================
+$spacer: 1rem; // 16px
+$spacers: (
+  0: 0,
+  1: 0.25rem,    // 4px
+  2: 0.5rem,     // 8px
+  3: 0.75rem,    // 12px
+  4: 1rem,       // 16px
+  5: 1.25rem,    // 20px
+  6: 1.5rem,     // 24px
+  8: 2rem,       // 32px
+  10: 2.5rem,    // 40px
+  12: 3rem,      // 48px
+  16: 4rem,      // 64px
+  20: 5rem,      // 80px
+  24: 6rem,      // 96px
+);
+
+// Border - Viền
+// ==========================================================================
+$border-radius-none: 0;
+$border-radius-sm: 0.25rem;     // 4px
+$border-radius: 0.5rem;         // 8px
+$border-radius-md: 0.75rem;     // 12px
+$border-radius-lg: 1rem;        // 16px
+$border-radius-xl: 1.5rem;      // 24px
+$border-radius-full: 9999px;
+
+$border-width: 1px;
+$border-width-md: 2px;
+$border-width-lg: 4px;
+$border-color: $gray-200;
+$border-color-dark: $gray-700;
+
+// Shadows - Đổ bóng (Improved depth)
+// ==========================================================================
+$shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+$shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+$shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+$shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+$shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+$shadow-2xl: 0 30px 60px -15px rgba(0, 0, 0, 0.3);
+
+// Colored shadows for primary & secondary
+$shadow-primary: 0 10px 15px -3px $primary-alpha-20, 0 4px 6px -4px $primary-alpha-20;
+$shadow-secondary: 0 10px 15px -3px $secondary-alpha-20, 0 4px 6px -4px $secondary-alpha-20;
+
+// Transitions - Chuyển động
+// ==========================================================================
+$transition-fast: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+$transition-base: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+$transition-slow: all 350ms cubic-bezier(0.4, 0, 0.2, 1);
+$transition-bounce: all 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+// Breakpoints - Responsive
+// ==========================================================================
+$breakpoints: (
+  xs: 0,
+  sm: 640px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1280px,
+  xxl: 1536px
+);
+
+// Container - Chiều rộng tối đa
+// ==========================================================================
+$container-max-widths: (
+  sm: 640px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1280px,
+  xxl: 1536px
+);
+
+// Grid - Lưới
+// ==========================================================================
+$grid-columns: 12;
+$grid-gutter-width: 1.5rem;
+
+// Components - Thành phần
+// ==========================================================================
+
+// Navbar
+$navbar-height: 64px;
+$navbar-bg: rgba(255, 255, 255, 0.8);
+$navbar-bg-dark: rgba(15, 23, 42, 0.9);
+$navbar-color: $gray-900;
+$navbar-color-dark: $gray-50;
+$navbar-backdrop-blur: blur(12px);
+
+// Footer
+$footer-bg: $gray-900;
+$footer-color: $gray-100;
+
+// Card
+$card-bg: white;
+$card-border-radius: $border-radius-lg;
+$card-shadow: $shadow;
+$card-shadow-hover: $shadow-lg;
+$card-border-color: $gray-200;
+
+// Button
+$btn-border-radius: $border-radius;
+$btn-padding-y: 0.625rem;    // 10px
+$btn-padding-x: 1.25rem;     // 20px
+$btn-font-weight: $font-weight-medium;
+$btn-shadow: $shadow-sm;
+$btn-shadow-hover: $shadow-md;
+
+// Input
+$input-bg: white;
+$input-border-radius: $border-radius;
+$input-border-color: $gray-300;
+$input-focus-border-color: $primary;
+$input-focus-ring: 0 0 0 3px $primary-alpha-20;
+$input-padding-y: 0.625rem;
+$input-padding-x: 0.875rem;
+
+// Product Card
+$product-card-bg: white;
+$product-card-border-radius: $border-radius-lg;
+$product-card-shadow: $shadow;
+$product-card-hover-shadow: $shadow-xl;
+$product-card-transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+
+// Badge
+$badge-border-radius: $border-radius-full;
+$badge-padding-y: 0.25rem;
+$badge-padding-x: 0.75rem;
+$badge-font-size: $font-size-xs;
+$badge-font-weight: $font-weight-medium;
+
+// Alert
+$alert-border-radius: $border-radius-md;
+$alert-padding-y: 1rem;
+$alert-padding-x: 1rem;
+$alert-border-width: 0;
+
+// Z-index layers
+// ==========================================================================
+$z-index: (
+  dropdown: 1000,
+  sticky: 1020,
+  fixed: 1030,
+  modal-backdrop: 9999,    // ← Tăng lên 9999
+  modal: 10000,            // ← Tăng lên 10000
+  popover: 10100,          // ← Tăng lên 10100
+  tooltip: 10200,          // ← Tăng lên 10200
+);

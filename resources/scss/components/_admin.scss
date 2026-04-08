@@ -1,0 +1,558 @@
+
+@use "sass:color";
+@use '../variables' as *;
+
+
+$navy: #0f172a;
+$blue-dark: #1e3a8a;
+$blue-main: #2563eb;
+$blue-light: #38bdf8;
+$indigo: #4f46e5;
+
+$bg-light: #f8f9fa;
+$text-dark: #1f2933;
+
+$gradient-sidebar: linear-gradient(
+  180deg,
+  $navy,
+  $blue-dark,
+  $blue-main
+);
+
+$gradient-admin-primary: linear-gradient(
+  135deg,
+  $blue-main,
+  $indigo
+);
+
+$gradient-admin-info: linear-gradient(
+  135deg,
+  #4facfe,
+  #00f2fe
+);
+
+$gradient-admin-success: linear-gradient(
+  135deg,
+  #11998e,
+  #38ef7d
+);
+
+$gradient-admin-warning: linear-gradient(
+  135deg,
+  #fbbf24, // vàng
+  #f97316  // cam
+);
+
+$gradient-admin-danger: linear-gradient(
+  135deg,
+  #ff6b6b,
+  #ee5a6f
+);
+
+$gradient-admin-secondary: linear-gradient(
+  135deg,
+  #6c757d,
+  #495057
+);
+
+
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+
+.admin-sidebar {
+  width: 260px;
+  height: 100vh;
+  position: fixed;
+  z-index: 1000;
+
+  background: $gradient-sidebar;
+  color: #fff;
+
+  overflow-y: auto;
+  transition: all 0.3s ease;
+
+  box-shadow: 2px 0 12px rgba(0, 0, 0, 0.15);
+
+
+  /* Header */
+  &__header {
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+
+  /* Brand */
+  &__brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    color: white;
+    text-decoration: none;
+
+    font-size: 1.25rem;
+    font-weight: 600;
+
+    transition: 0.3s;
+
+    i {
+      font-size: 1.5rem;
+    }
+
+    &:hover {
+      color: $blue-light;
+      transform: translateX(5px);
+    }
+  }
+
+
+  /* Nav */
+  &__nav {
+    padding: 1rem 0;
+  }
+
+
+  /* Links */
+  &__link {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    padding: 0.875rem 1.5rem;
+
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+
+    transition: 0.3s;
+
+
+    i {
+      width: 20px;
+      font-size: 1.125rem;
+    }
+
+
+    /* Active Bar */
+    &::before {
+      content: "";
+
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+
+      width: 4px;
+
+      background: linear-gradient(
+        180deg,
+        $blue-light,
+        $blue-main
+      );
+
+      transform: scaleY(0);
+      transition: 0.3s;
+    }
+
+
+    &:hover,
+    &.active {
+      background: rgba(255, 255, 255, 0.12);
+      color: white;
+
+      padding-left: 1.75rem;
+
+      &::before {
+        transform: scaleY(1);
+      }
+    }
+  }
+
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    transform: translateX(-100%);
+
+    &.active {
+      transform: translateX(0);
+    }
+  }
+}
+
+
+.admin-main {
+  flex: 1;
+  margin-left: 260px;
+
+  background: $bg-light;
+
+  @media (max-width: 768px) {
+    margin-left: 0;
+  }
+}
+
+.admin-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 1rem 1.5rem;
+
+  background: linear-gradient(
+    135deg,
+    #ffffff,
+    #eef2ff
+  );
+
+  border-bottom: 1px solid rgba($blue-dark, 0.1);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+
+
+  &__user {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    i {
+      color: $blue-dark;
+    }
+  }
+}
+
+.admin-sidebar-toggle {
+  display: none;
+
+  background: none;
+  border: none;
+
+  font-size: 1.5rem;
+  cursor: pointer;
+
+  color: $blue-dark;
+
+  transition: 0.3s;
+
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+
+  @media (max-width: 768px) {
+    display: block;
+  }
+}
+
+.admin-content {
+  padding: 1.5rem;
+}
+
+.stats-card {
+  border: none;
+  border-radius: 16px;
+
+  overflow: hidden;
+
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  }
+
+
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 1.5rem;
+  }
+
+
+  &__icon {
+    width: 60px;
+    height: 60px;
+
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(255, 255, 255, 0.25);
+
+    backdrop-filter: blur(10px);
+
+    font-size: 1.75rem;
+  }
+
+
+  &--primary {
+    background: $gradient-admin-primary;
+    color: white;
+  }
+
+  &--success {
+    background: $gradient-admin-success;
+    color: white;
+  }
+
+  &--warning {
+    background: $gradient-admin-warning;
+    color: white;
+  }
+
+  &--info {
+    background: $gradient-admin-info;
+    color: white;
+  }
+}
+
+
+// Card headers with gradients (admin specific)
+.card-header {
+  &.bg-primary {
+    background: $gradient-admin-primary !important;
+    color: white;
+    border: none;
+  }
+
+  &.bg-success {
+    background: $gradient-admin-success !important;
+    color: white;
+    border: none;
+  }
+
+  &.bg-info {
+    background: $gradient-admin-info !important;
+    color: white;
+    border: none;
+  }
+
+  &.bg-warning {
+    background: $gradient-admin-warning !important;
+    color: white;
+    border: none;
+  }
+
+  &.bg-danger {
+    background: $gradient-admin-danger !important;
+    color: white;
+    border: none;
+  }
+
+  &.bg-secondary {
+    background: $gradient-admin-secondary !important;
+    color: white;
+    border: none;
+  }
+}
+
+// Button overrides for admin (with gradients)
+.btn {
+  &-primary {
+    background: $gradient-admin-primary;
+    border: none;
+
+    &:hover {
+      background: linear-gradient(
+        135deg,
+        color.adjust($blue-main, $lightness: -5%),
+        color.adjust($indigo, $lightness: -5%)
+      );
+
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba($blue-main, 0.4);
+    }
+  }
+
+  &-success {
+    background: $gradient-admin-success;
+    border: none;
+    color: white;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(#11998e, 0.4);
+    }
+  }
+
+  &-danger {
+    background: $gradient-admin-danger;
+    border: none;
+    color: white;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(#ff6b6b, 0.4);
+    }
+  }
+
+  &-info {
+    background: $gradient-admin-info;
+    border: none;
+    color: white;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(#4facfe, 0.4);
+    }
+  }
+
+  &-warning {
+    background: $gradient-admin-warning;
+    border: none;
+    color: white;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(#f093fb, 0.4);
+    }
+  }
+
+  &-secondary {
+    background: $gradient-admin-secondary;
+    border: none;
+    color: white;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(#6c757d, 0.4);
+    }
+  }
+}
+
+// Table with gradient header (admin specific)
+.table {
+  thead {
+    background: $gradient-admin-primary;
+    color: white;
+
+    th {
+      border: none;
+      font-weight: 600;
+    }
+  }
+
+  tbody tr {
+    &:hover {
+      background: rgba($blue-dark, 0.05);
+    }
+  }
+}
+
+// Badge with gradients
+.badge {
+  &.bg-success {
+    background: $gradient-admin-success !important;
+  }
+
+  &.bg-warning {
+    background: $gradient-admin-warning !important;
+  }
+
+  &.bg-danger {
+    background: $gradient-admin-danger !important;
+  }
+
+  &.bg-info {
+    background: $gradient-admin-info !important;
+  }
+}
+
+.inventory-page {
+
+  .inventory-title {
+    color: $navy;
+  }
+
+  .inventory-subtitle {
+    font-size: 0.875rem;
+  }
+
+  .inventory-actions {
+    gap: 0.5rem;
+  }
+
+  .inventory-search {
+    position: relative;
+    min-width: 200px;
+    flex: 1;
+
+    i {
+      position: absolute;
+      left: 0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #94a3b8;
+      font-size: 0.875rem;
+    }
+
+    input {
+      padding-left: 2.2rem;
+    }
+  }
+
+  .inventory-select {
+    min-width: 160px;
+  }
+
+  .inventory-table {
+
+    tbody tr {
+      &.row-out {
+        background: rgba(239, 68, 68, 0.05);
+      }
+
+      &.row-low {
+        background: rgba(251, 191, 36, 0.05);
+      }
+    }
+  }
+
+  .inventory-empty-icon {
+    font-size: 2.5rem;
+    color: #cbd5e1;
+  }
+
+  .stats-card__value {
+    font-size: 1.75rem;
+    font-weight: 800;
+    line-height: 1;
+  }
+
+  .stats-card__label {
+    font-size: 0.8rem;
+    opacity: 0.9;
+  }
+}
+
+
+
+@media (max-width: 768px) {
+  .admin-content {
+    padding: 1rem;
+  }
+
+  .card-body {
+    padding: 1rem;
+  }
+
+  .btn-group {
+    flex-direction: column;
+    width: 100%;
+
+    .btn {
+      border-radius: 8px !important;
+      margin-bottom: 0.25rem;
+    }
+  }
+}
