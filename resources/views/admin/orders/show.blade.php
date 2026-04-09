@@ -1,3 +1,4 @@
+{-- resources/views/admin/orders/show.blade.php --}
 @extends('admin.layouts.admin')
 
 @section('title', 'Đơn hàng ' . $order->order_code)
