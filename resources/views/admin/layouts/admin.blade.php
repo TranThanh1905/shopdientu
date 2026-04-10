@@ -206,15 +206,19 @@
             <div class="admin-topbar__user">
                 {{-- Thông báo đơn chờ --}}
                 <a href="{{ route('admin.orders.index', ['status' => 'pending']) }}"
-                   class="btn btn-light btn-sm position-relative me-1"
-                   title="{{ $pendingCount ?? 0 }} đơn chờ">
-                    <i class="fa-solid fa-bell"></i>
-                    @if(($pendingCount ?? 0) > 0)
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-                              style="font-size: 0.6rem;">
-                            {{ $pendingCount }}
-                        </span>
-                    @endif
+                class="btn btn-light btn-sm me-1"
+                title="{{ $pendingCount ?? 0 }} đơn chờ">
+
+                    <span class="position-relative d-inline-block">
+                        <i class="fa-solid fa-bell"></i>
+
+                        @if(($pendingCount ?? 0) > 0)
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                                style="font-size: 0.6rem;">
+                                {{ $pendingCount }}
+                            </span>
+                        @endif
+                    </span>
                 </a>
 
                 {{-- User dropdown --}}
